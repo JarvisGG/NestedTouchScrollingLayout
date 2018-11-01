@@ -1,33 +1,39 @@
 language: android
 jdk: oraclejdk8
-sudo: false
-
+env:
+  global:
+  - ANDROID_API=27
 android:
   components:
-    - tools
-    - build-tools-25.0.2
-    - android-25
-    - extra-android-m2repository
-    - extra-android-support
+  - tools
+  - tools
+  - platform-tools
+  - build-tools-26.0.2
+  - android-${ANDROID_API}
+  - extra-android-m2repository
   licenses:
-      - android-sdk-license-.+
-      - '.+'
-
-machine:
-  environment:
-      ANDROID_HOME: /usr/local/android-sdk-linux
-
-dependencies:
-  pre:
-    - mkdir -p "$ANDROID_HOME/licenses"
-    - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-    - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-    
+  - android-sdk-license-.+
 before_install:
-  - chmod +x gradlew
-  - mkdir "$ANDROID_HOME/licenses" || true
-  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-
+- openssl aes-256-cbc -K $encrypted_839e38d787bc_key -iv $encrypted_839e38d787bc_iv
+  -in OurStore.keystore.enc -out OurStore.keystore -d
+- yes | sdkmanager "platforms;android-27"
+before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
+cache:
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/.android/build-cache"
 script:
-  - ./gradlew assembleRelease
+- "./gradlew assembleRelease"
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  overwrite: true
+  api_key:
+    secure: oVvKZhQGC9fhquSLNuYclzH7XdZusVclYJBNHc4MUHkcUJTcTZdQHb1NYFGeaWH1BXvQ9Po58bhpJefHLqMeWvy3/6yyLYPXCQMvT4b7Xi3rkinNVjvoM/RaYHun9R6BAxK/mw8mIC9uVTJHD4jj/rLQsG4Jq/ZEDJyKA8SeHLmDxS82u/1nhDVNZrxd1nMdribkkrxUnsOy2ErH4gJv8O+nbQS3w8JJry26zkh13EKovPrSBe3ogmIlF3gYRZuBbpMAoTYeSQ1uPAapMJEwqIdyeBasTyFmU29Qec3OG/Ud4MB3tK3FF3IFTjygM6SNO4MLn5x8VLnSlthlou9BOXXogqpg5smF1N91/bSWuiDfiRH1nqBX9k7sLy4UjCOaGfP74YAOF8GWHtYVEC2UOvWS4KtZX46gq6ejFibl4gRvtjqLYemBb5M/aczSjJXRMFXOx/X8zxpJ8Dx4K2ioyFqraaFhdyIm5Be3JQmwDr7GfkTapwnbV1ru3UPiXoRdfYgh9yxnSeehUES1m73Fsd29IWlHYZfhCFBF7wOgI5z7P3mKEVPpt/Xx9TBOnoZrS3PhabuG6BmSRhIfPd3s2j6U8YH5Pu/DRANBqJuK7+YlFtEBOP8txUuYzLDU0lLDGyOK/EzIm1jguxUMVfhk5OlracL/3kOeMETXP7+VCw8=
+  file_glob: true
+  file: /home/travis/build/ValCanBuild/TravisAndroidExample/app/build/outputs/apk/release/*
+  on:
+    repo: ValCanBuild/TravisAndroidExample
+    tags: true
