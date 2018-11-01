@@ -13,5 +13,18 @@ There has some example gif~
 
 ****
 ## 效果
-* ![demo1](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo1.gif)
-* ![demo2](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo2.gif)
+![demo1](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo1.gif)
+![demo2](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo2.gif)
+
+
+# Usage
+``` Gradle
+repositories {
+    // ...
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    implementation 'com.github.JarvisGG:NestedTouchScrollingLayout:v1.0.0'
+}
+```
