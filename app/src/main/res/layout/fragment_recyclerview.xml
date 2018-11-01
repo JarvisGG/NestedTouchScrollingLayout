@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zhihu.com.library.NestedTouchScrollingLayout
+    android:id="@+id/fragment_wrapper"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/container_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:overScrollMode="always">
+    </android.support.v7.widget.RecyclerView>
+
+</zhihu.com.library.NestedTouchScrollingLayout>
+

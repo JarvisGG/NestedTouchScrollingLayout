@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:background="#66FFCC">
+
+    <zhihu.com.library.NestedTouchScrollingLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+
+        <WebView
+            android:id="@+id/container_wb"
+            android:layout_width="match_parent"
+            android:layout_height="400dp">
+        </WebView>
+
+    </zhihu.com.library.NestedTouchScrollingLayout>
+
+</FrameLayout>
