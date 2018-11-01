@@ -1,5 +1,6 @@
 NestedTouchScrollingLayout
 ===========================
+[![](https://jitpack.io/v/JarvisGG/NestedTouchScrollingLayout.svg)](https://jitpack.io/#JarvisGG/NestedTouchScrollingLayout)
 This layout is used to support dispatch touch event.
 There has some example gif~
 
