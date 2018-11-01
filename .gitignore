@@ -6,5 +6,4 @@
 gradlew
 gradlew.*
 /build
-/captures
 .externalNativeBuild
