@@ -7,7 +7,8 @@
     android:clipToPadding="false"
     android:background="#66FFCC">
 
-    <zhihu.com.library.NestedTouchScrollingLayout
+    <jarvis.com.library.NestedTouchScrollingLayout
+        android:id="@+id/wrapper"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,6 +21,6 @@
             android:overScrollMode="always">
         </android.support.v7.widget.RecyclerView>
 
-    </zhihu.com.library.NestedTouchScrollingLayout>
+    </jarvis.com.library.NestedTouchScrollingLayout>
 
 </FrameLayout>

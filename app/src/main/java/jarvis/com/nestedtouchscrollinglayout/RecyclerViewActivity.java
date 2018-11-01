@@ -1,5 +1,6 @@
 package jarvis.com.nestedtouchscrollinglayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import jarvis.com.library.NestedTouchScrollingLayout;
+
 /**
  * @author yyf @ Zhihu Inc.
  * @since 10-16-2018
@@ -24,6 +27,8 @@ public class RecyclerViewActivity extends BaseActivity  {
     private int mInnerItemsCount = 13;
 
     private RecyclerView mContainerRecycler;
+
+    private NestedTouchScrollingLayout mContainer;
 
 
     @Override
@@ -50,6 +55,25 @@ public class RecyclerViewActivity extends BaseActivity  {
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.getItemOffsets(outRect, view, parent, state);
                 outRect.bottom = 30;
+            }
+        });
+
+        mContainer = findViewById(R.id.wrapper);
+
+        mContainer.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
+            @Override
+            public void onNestChildScrollChange(float deltaY) {
+
+            }
+
+            @Override
+            public void onNestChildScrollRelease(float deltaY, int velocityY) {
+                mContainer.recover(0);
+            }
+
+            @Override
+            public void onNestChildHorizationScroll(boolean show) {
+
             }
         });
     }

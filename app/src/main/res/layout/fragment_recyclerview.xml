@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<zhihu.com.library.NestedTouchScrollingLayout
+<jarvis.com.library.NestedTouchScrollingLayout
     android:id="@+id/fragment_wrapper"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_gravity="center"
@@ -14,5 +14,5 @@
         android:overScrollMode="always">
     </android.support.v7.widget.RecyclerView>
 
-</zhihu.com.library.NestedTouchScrollingLayout>
+</jarvis.com.library.NestedTouchScrollingLayout>
 

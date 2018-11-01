@@ -12,6 +12,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import jarvis.com.library.NestedTouchScrollingLayout;
+
 /**
  * @author yyf @ Zhihu Inc.
  * @since 10-16-2018
@@ -19,6 +21,7 @@ import android.webkit.WebViewClient;
 public class WebViewActivity extends BaseActivity {
 
     private WebView mWebView;
+    private NestedTouchScrollingLayout mContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +34,25 @@ public class WebViewActivity extends BaseActivity {
         initWebViewClient();
 
         mWebView.loadUrl("http://m.meten.com/xxl/adult.html");
+
+        mContainer = findViewById(R.id.wrapper);
+
+        mContainer.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
+            @Override
+            public void onNestChildScrollChange(float deltaY) {
+
+            }
+
+            @Override
+            public void onNestChildScrollRelease(float deltaY, int velocityY) {
+                mContainer.recover(0);
+            }
+
+            @Override
+            public void onNestChildHorizationScroll(boolean show) {
+
+            }
+        });
     }
 
     @SuppressLint("SetJavaScriptEnabled")
