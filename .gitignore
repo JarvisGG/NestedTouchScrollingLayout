@@ -3,7 +3,5 @@
 /local.properties
 /.idea/*
 .DS_Store
-gradlew
-gradlew.*
 /build
 .externalNativeBuild
