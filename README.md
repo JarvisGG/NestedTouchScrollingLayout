@@ -69,7 +69,7 @@ mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrol
 });
 ```
 
-## Next
+### Next
 - [x] hold all touch event, and dispath touch event to child view.
 - [ ] support CoordinatorLayout (AppbarLayout).
 - [ ] add damping draging.
@@ -96,6 +96,11 @@ dependencies {
     implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.0.0'
 }
 ```
+
+
+> Tip
+>> star star star ！！！！:blush:
+
 ### LICENSE
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/License_icon-mit-88x31-2.svg/128px-License_icon-mit-88x31-2.svg.png)
 
