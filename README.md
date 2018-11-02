@@ -69,6 +69,11 @@ mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrol
 });
 ```
 
+## Next
+- [x] hold all touch event, and dispath touch event to child view.
+- [ ] support CoordinatorLayout (AppbarLayout).
+- [ ] add damping draging.
+
 ### Usage
 方式 1:
 ``` Gradle
