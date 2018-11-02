@@ -42,3 +42,9 @@ dependencies {
     implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.0.0'
 }
 ```
+### LICENSE
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/License_icon-mit-88x31-2.svg/128px-License_icon-mit-88x31-2.svg.png)
+
+This library is available under the MIT license. See the [LICENSE](https://opensource.org/licenses/MIT) file for more info.
+
+Copyright (c) 2018 Jarvis
