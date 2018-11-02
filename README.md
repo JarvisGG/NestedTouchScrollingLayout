@@ -33,7 +33,7 @@ dependencies {
 }
 ```
 方式 2:
-```
+``` Gradle
 repositories {
     // ...
     jcenter()
