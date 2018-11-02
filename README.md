@@ -19,8 +19,55 @@ There has some example gif~
 |![demo1](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo1.gif "demo1")|![demo2](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo2.gif "demo2")|
 |---|---|
 
+###Usage example
 
-# Usage
+``` XML
+<jarvis.com.library.NestedTouchScrollingLayout
+    android:id="@+id/wrapper"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/container_rv"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="#fff"
+        android:overScrollMode="always">
+    </android.support.v7.widget.RecyclerView>
+
+</jarvis.com.library.NestedTouchScrollingLayout>
+```
+
+``` Java
+mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
+        
+        // 当前 Layout 偏移距离
+	@Override
+	public void onNestChildScrollChange(float deltaY) {
+
+	}
+	
+	// finger 脱离屏幕 Layout 偏移量，以及当前 Layout 的速度
+	@Override
+	public void onNestChildScrollRelease(final float deltaY, final int velocityY) {
+		mNestedTouchScrollingLayout.recover(0, new Runnable() {
+			@Override
+			public void run() {
+				Log.i("NestedTouchScrollingLayout ---> ", "deltaY : " + deltaY + " velocityY : " + velocityY);
+			}
+		});
+	}
+
+	// 当前是不是横向拖拽
+	@Override
+	public void onNestChildHorizationScroll(boolean show) {
+	
+	}
+});
+```
+
+### Usage
 方式 1:
 ``` Gradle
 repositories {

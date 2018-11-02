@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class RecyclerViewActivity extends BaseActivity  {
 
     private RecyclerView mContainerRecycler;
 
-    private NestedTouchScrollingLayout mContainer;
+    private NestedTouchScrollingLayout mNestedTouchScrollingLayout;
 
 
     @Override
@@ -58,17 +59,22 @@ public class RecyclerViewActivity extends BaseActivity  {
             }
         });
 
-        mContainer = findViewById(R.id.wrapper);
+        mNestedTouchScrollingLayout = findViewById(R.id.wrapper);
 
-        mContainer.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
+        mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
             @Override
             public void onNestChildScrollChange(float deltaY) {
 
             }
 
             @Override
-            public void onNestChildScrollRelease(float deltaY, int velocityY) {
-                mContainer.recover(0);
+            public void onNestChildScrollRelease(final float deltaY, final int velocityY) {
+                mNestedTouchScrollingLayout.recover(0, new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("NestedTouchScrollingLayout ---> ", "deltaY : " + deltaY + " velocityY : " + velocityY);
+                    }
+                });
             }
 
             @Override
