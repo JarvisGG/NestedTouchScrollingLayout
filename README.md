@@ -1,6 +1,8 @@
 NestedTouchScrollingLayout
 ===========================
 [![](https://jitpack.io/v/JarvisGG/NestedTouchScrollingLayout.svg)](https://jitpack.io/#JarvisGG/NestedTouchScrollingLayout)
+![Platform](https://img.shields.io/badge/platform-Androd-green.svg)
+![SDK](https://img.shields.io/badge/SDK-12%2B-blue.svg)
 [![](https://img.shields.io/badge/Author-JarvisGG-7AD6FD.svg)](http:\//jarvisgg.github.io/)
 
 This layout is used to support dispatch touch event.
