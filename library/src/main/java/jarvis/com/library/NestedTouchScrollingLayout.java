@@ -241,6 +241,7 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
 
 
             if (isHoldTouch && (!isChildCanScroll(event, deltaY))) {
+                mDownY = event.getY();
                 velocityTracker.clear();
                 isHoldTouch = false;
                 newSheetTranslation = mSheetTranslation;
