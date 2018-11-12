@@ -32,6 +32,8 @@ public class WebViewFragment extends BaseChildFragment {
 
     private WebView mWebView;
 
+    private NestedTouchScrollingLayout mNestedTouchScrollingLayout;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +45,30 @@ public class WebViewFragment extends BaseChildFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_webview, container, false);
         mWebView = view.findViewById(R.id.web_view);
+        mNestedTouchScrollingLayout = view.findViewById(R.id.fragment_wrapper);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
+            @Override
+            public void onNestChildScrollChange(float deltaY) {
+
+            }
+
+            @Override
+            public void onNestChildScrollRelease(float deltaY, int velocityY) {
+                mNestedTouchScrollingLayout.recover(0);
+            }
+
+            @Override
+            public void onNestChildHorizationScroll(boolean show) {
+
+            }
+        });
 
         initWebSettings();
         initWebViewClient();

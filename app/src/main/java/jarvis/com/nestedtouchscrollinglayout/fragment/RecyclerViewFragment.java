@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import jarvis.com.library.NestedTouchScrollingLayout;
 import jarvis.com.nestedtouchscrollinglayout.R;
 
 /**
@@ -28,6 +29,8 @@ public class RecyclerViewFragment extends BaseChildFragment {
     private int mInnerItemsCount = 23;
 
     private RecyclerView mContainerRecycler;
+
+    private NestedTouchScrollingLayout mNestedTouchScrollingLayout;
 
     private Bundle arg;
 
@@ -44,12 +47,30 @@ public class RecyclerViewFragment extends BaseChildFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         mContainerRecycler = view.findViewById(R.id.container_rv);
+        mNestedTouchScrollingLayout = view.findViewById(R.id.fragment_wrapper);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
+            @Override
+            public void onNestChildScrollChange(float deltaY) {
+
+            }
+
+            @Override
+            public void onNestChildScrollRelease(float deltaY, int velocityY) {
+                mNestedTouchScrollingLayout.recover(0, null, 300);
+            }
+
+            @Override
+            public void onNestChildHorizationScroll(boolean show) {
+
+            }
+        });
 
         mContainerRecycler.setLayoutManager(new LinearLayoutManager(RecyclerViewFragment.this.getContext(), LinearLayoutManager.VERTICAL, false));
         mContainerRecycler.setAdapter(new InnerAdapter(RecyclerViewFragment.this.getContext(), 0x9966CC));

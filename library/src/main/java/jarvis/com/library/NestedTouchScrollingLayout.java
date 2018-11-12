@@ -73,6 +73,8 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
      */
     private boolean isLeftorRightTouchLimit = true;
 
+    private boolean isFingerHolderTouch = false;
+
     private List<INestChildScrollChange> mNestChildScrollChangeCallbacks;
 
 
@@ -200,12 +202,15 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
             mDownSheetTranslation = mSheetTranslation;
             velocityTracker.clear();
 
+            isFingerHolderTouch = true;
+
             if (mChildView instanceof WebView) {
                 mWebViewContentHeight = (int) (((WebView)mChildView).getContentHeight() * ((WebView)mChildView).getScale());
             }
         }
 
         if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+            isFingerHolderTouch = false;
             isLeftorRightTouchLimit = true;
         }
 
@@ -293,7 +298,8 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
         return (fingerDown && canScrollUp) || (fingerUp && canScrollDown);
     }
 
-    private boolean canScrollUp(View view, float x, float y) {
+    protected boolean canScrollUp(View view, float x, float y) {
+
         if (view instanceof WebView) {
             return canWebViewScrollUp();
         }
@@ -314,7 +320,7 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
         return view.canScrollVertically(-1);
     }
 
-    private boolean canScrollDown(View view, float x, float y) {
+    protected boolean canScrollDown(View view, float x, float y) {
         if (view instanceof WebView) {
             return canWebViewScrollDown();
         }
@@ -414,6 +420,10 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
         if (mChildView != null) {
             mChildView.setTranslationY(transY);
         }
+        if (transY == 0) {
+            mDownSheetTranslation = getMeasuredHeight();
+            mOriginTranslate = 0;
+        }
     }
 
     /**
@@ -425,8 +435,12 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
     }
 
     public void recover(int target, final Runnable runnable) {
+        recover(target, runnable, 300);
+    }
+
+    public void recover(int target, final Runnable runnable, int time) {
         currentAnimator = ObjectAnimator.ofFloat(this, SHEET_TRANSLATION, target);
-        currentAnimator.setDuration(300);
+        currentAnimator.setDuration(time);
         currentAnimator.setInterpolator(new DecelerateInterpolator(1.6f));
         currentAnimator.addListener(new CancelDetectionAnimationListener() {
             @Override
@@ -482,13 +496,6 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
                 mChildView.getTranslationY(), 0.0F);
         mTransYAnim.setDuration(200L);
         mTransYAnim.setInterpolator(PathInterpolatorCompat.create(0.4F, 0.0F, 0.2F, 1.0F));
-
-        mTransYAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-
-            }
-        });
 
         mTransYAnim.start();
     }
@@ -578,5 +585,11 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
         return super.getNestedScrollAxes();
     }
 
-}
+    public boolean isFingerHolderTouch() {
+        return isFingerHolderTouch;
+    }
 
+    public float getMinFlingVelocity() {
+        return minFlingVelocity;
+    }
+}
