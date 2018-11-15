@@ -72,6 +72,7 @@ mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrol
 ### Next
 - [x] hold all touch event, and dispath touch event to child view.
 - [x] fix ACTION_UP dispatch child click event.
+- [ ] support bottomsheet.
 - [ ] support CoordinatorLayout (AppbarLayout).
 - [ ] add damping draging.
 
