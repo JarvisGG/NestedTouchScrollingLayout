@@ -85,7 +85,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.JarvisGG:NestedTouchScrollingLayout:v1.0.2'
+    implementation 'com.github.JarvisGG:NestedTouchScrollingLayout:v1.1.0'
 }
 ```
 方式 2:
@@ -95,7 +95,7 @@ repositories {
     jcenter()
 }
 dependencies {
-    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.0.2'
+    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.1.0'
 }
 ```
 
