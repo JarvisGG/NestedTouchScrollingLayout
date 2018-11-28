@@ -65,6 +65,11 @@ public class WebViewFragment extends BaseChildFragment {
             }
 
             @Override
+            public void onFingerUp(float velocityY) {
+
+            }
+
+            @Override
             public void onNestChildHorizationScroll(boolean show) {
 
             }

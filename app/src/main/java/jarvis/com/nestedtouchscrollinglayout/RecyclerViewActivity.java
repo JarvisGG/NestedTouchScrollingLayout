@@ -78,6 +78,11 @@ public class RecyclerViewActivity extends BaseActivity  {
             }
 
             @Override
+            public void onFingerUp(float velocityY) {
+
+            }
+
+            @Override
             public void onNestChildHorizationScroll(boolean show) {
 
             }

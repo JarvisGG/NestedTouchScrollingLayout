@@ -43,7 +43,7 @@ def gitUrl = 'https://github.com/JarvisGG/NestedTouchScrollingLayout.git'
 def libName = "NestedTouchScrollingLayout"
 
 group = "com.jarvis.library.NestedTouchScrollingLayout"
-version = "1.0.2"
+version = "1.1.0"
 
 
 task sourcesJar(type: Jar) {

@@ -49,6 +49,11 @@ public class WebViewActivity extends BaseActivity {
             }
 
             @Override
+            public void onFingerUp(float velocityY) {
+
+            }
+
+            @Override
             public void onNestChildHorizationScroll(boolean show) {
 
             }

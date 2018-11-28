@@ -46,6 +46,11 @@ public abstract class BaseChildFragment extends Fragment {
             }
 
             @Override
+            public void onFingerUp(float velocityY) {
+
+            }
+
+            @Override
             public void onNestChildHorizationScroll(boolean show) {
 
             }
