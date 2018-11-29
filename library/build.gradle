@@ -35,13 +35,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-
-
-
-def siteUrl = 'https://github.com/JarvisGG/NestedTouchScrollingLayout'
-def gitUrl = 'https://github.com/JarvisGG/NestedTouchScrollingLayout.git'
-def libName = "NestedTouchScrollingLayout"
-
 group = "com.jarvis.library.NestedTouchScrollingLayout"
 version = "1.1.0"
 
@@ -83,9 +76,9 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'Jarvis Android'
-                description 'This layout is used to support dispatch touch event.'
-                url siteUrl
+                name PROJECT_NAME
+                description PROJECT_DESC
+                url PROJECT_URL
                 licenses {
                     license {
                         name 'The Apache Software License, Version 2.0'
@@ -94,15 +87,15 @@ install {
                 }
                 developers {
                     developer {
-                        id 'jarvisgg'
-                        name 'jarvis'
-                        email 'yang4130qq@gmail.com'
+                        id JARVIS_ID
+                        name JARVIS_NAME
+                        email JARVIS_EMAIL
                     }
                 }
                 scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
+                    connection PROJECT_GIT_URL
+                    developerConnection PROJECT_GIT_URL
+                    url PROJECT_URL
                 }
             }
         }
@@ -117,11 +110,11 @@ bintray {
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
-        repo = "maven"
-        name = libName
-        desc = 'This layout is used to support dispatch touch event.'
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
+        repo = PKG_REPO
+        name = PKG_NAME
+        desc = PKG_DESC
+        websiteUrl = PROJECT_URL
+        vcsUrl = PROJECT_GIT_URL
         licenses = ["Apache-2.0"]
         publish = true
 
@@ -129,7 +122,7 @@ bintray {
             name = '1.0'
             desc = 'jarvis open library.'
             released  = new Date()
-            vcsTag = 'v1.0'
+            vcsTag = VCS_TAG
         }
     }
 }
