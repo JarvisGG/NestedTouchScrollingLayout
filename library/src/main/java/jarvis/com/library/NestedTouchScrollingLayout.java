@@ -74,6 +74,16 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
     private @SheetDirection int mSheetDirection = SheetDirection.ALL;
 
     /**
+     * 手指向上阻尼值
+     */
+    private float mDampingUp = 1;
+
+    /**
+     * 手指向下阻尼值
+     */
+    private float mDampingDown = 1;
+
+    /**
      ************* 键盘收起，导致 reLayout，getHeight 发生改变，所以一开始就锁定高度
      */
     private int mTouchParentViewOriginMeasureHeight = 0;
@@ -226,6 +236,7 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        float velocityY = 0;
         if (getChildAt(0) == null || !isParentDispatchTouchEvent) {
             return super.onTouchEvent(event);
         }
@@ -241,7 +252,7 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
             mParentOwnsTouch = false;
             mDownY = event.getY();
             mDownX = event.getX();
-            mSheetTranslation = getMeasuredHeight() - mOriginTranslate;
+            mSheetTranslation = mTouchParentViewOriginMeasureHeight - mOriginTranslate;
             mDownSheetTranslation = mSheetTranslation;
             velocityTracker.clear();
 
@@ -255,13 +266,16 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
         if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
             isFingerHolderTouch = false;
             isLeftorRightTouchLimit = true;
+            velocityTracker.computeCurrentVelocity(1000);
+            velocityY = velocityTracker.getYVelocity();
+            notifyOnFingerUp(velocityY);
         }
 
         getParent().requestDisallowInterceptTouchEvent(true);
 
         velocityTracker.addMovement(event);
 
-        float maxSheetTranslation = getMeasuredHeight();
+        float maxSheetTranslation = mTouchParentViewOriginMeasureHeight;
 
         float deltaY = mDownY - event.getY();
         float deltaX = mDownX - event.getX();
@@ -312,7 +326,7 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
             }
 
             if (isHoldTouch) {
-                event.offsetLocation(0, mSheetTranslation - getMeasuredHeight());
+                event.offsetLocation(0, mSheetTranslation - mTouchParentViewOriginMeasureHeight);
                 getChildAt(0).dispatchTouchEvent(event);
             } else {
                 setSheetTranslation(newSheetTranslation);
@@ -320,14 +334,17 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
                 if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                     isHoldTouch = true;
                     getParent().requestDisallowInterceptTouchEvent(false);
-                    velocityTracker.computeCurrentVelocity(1000);
-                    float velocityY = velocityTracker.getYVelocity();
-//                    recover(0);
+
+                    if (Math.abs(velocityY) < minFlingVelocity) {
+                        if (mSheetTranslation > getHeight() / 2) { } else { }
+                    } else {
+                        if (velocityY < 0) { } else { }
+                    }
                     notifyNestScrollChildReleaseCallback((int) velocityY);
                 }
             }
         } else {
-            event.offsetLocation(0, mSheetTranslation - getMeasuredHeight());
+            event.offsetLocation(0, mSheetTranslation - mTouchParentViewOriginMeasureHeight);
             getChildAt(0).dispatchTouchEvent(event);
         }
         return true;
@@ -475,12 +492,13 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
         if (mSheetDirection == SheetDirection.TOP && transY > 0) {
             return;
         }
+        transY = transY > 0 ? transY * mDampingDown : transY * mDampingUp;
         notifyNestScrollChildChangeCallback(transY);
         if (mChildView != null) {
             mChildView.setTranslationY(transY);
         }
         if (transY == 0) {
-            mDownSheetTranslation = getMeasuredHeight();
+            mDownSheetTranslation = mTouchParentViewOriginMeasureHeight;
             mOriginTranslate = 0;
         }
     }
@@ -693,5 +711,13 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
 
     public void hiden(Runnable runnable) {
         recover(getMeasuredHeight(), runnable);
+    }
+
+    public void setDampingDown(float mDampingDown) {
+        this.mDampingDown = mDampingDown;
+    }
+
+    public void setDampingUp(float mDampingUp) {
+        this.mDampingUp = mDampingUp;
     }
 }
