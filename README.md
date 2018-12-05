@@ -1,7 +1,7 @@
 NestedTouchScrollingLayout
 ===========================
 [![](https://jitpack.io/v/JarvisGG/NestedTouchScrollingLayout.svg)](https://jitpack.io/#JarvisGG/NestedTouchScrollingLayout)
-![Platform](https://img.shields.io/badge/platform-Androd-green.svg)
+![Platform](https://img.shields.io/badge/platform-android-blue.svg)
 ![SDK](https://img.shields.io/badge/SDK-12%2B-blue.svg)
 [![](https://img.shields.io/badge/Author-JarvisGG-7AD6FD.svg)](http:\//jarvisgg.github.io/)
 
@@ -19,10 +19,13 @@ There has some example gif~
 ****
 ## 效果
 |![demo1](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo1.gif "demo1")|![demo2](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo2.gif "demo2")|
-|---|---|
+|normal|webview|
+|![demo3](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo1.gif "demo3")|![demo4](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo1.gif "demo4")|
+|bottomsheet normal|bottomsheet appbarlayout|
 
-###Usage example
+### Usage example
 
+#### normal use
 ``` XML
 <jarvis.com.library.NestedTouchScrollingLayout
     android:id="@+id/wrapper"
@@ -42,6 +45,11 @@ There has some example gif~
 ```
 
 ``` Java
+// 设置手指下拉阻尼
+mNestedTouchScrollingLayout.setDampingDown(2.0f / 5);
+// 设置手指上拉阻尼
+mNestedTouchScrollingLayout.setDampingUp(3.0f / 5);
+
 mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
         
         // 当前 Layout 偏移距离
@@ -60,11 +68,85 @@ mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrol
 			}
 		});
 	}
-
-	// 当前是不是横向拖拽
+	// 手指抬起时机
 	@Override
-	public void onNestChildHorizationScroll(boolean show) {
+	public void onFingerUp(float velocityY) {
+
+	}
+
+	// 横向拖拽
+	@Override
+	public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 	
+	}
+});
+```
+#### bottomsheet use
+``` xml
+ <jarvis.com.library.NestedTouchScrollingLayout
+	android:id="@+id/wrapper"
+	android:layout_marginTop="30dp"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<android.support.v7.widget.RecyclerView
+		android:background="#fff"
+		android:id="@+id/container_rv"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" />
+
+</jarvis.com.library.NestedTouchScrollingLayout>
+```
+``` java
+// 临界速度，根据业务而定
+public static int mVelocityYBound = 1300;
+
+// 规定 sheetView 弹起方向
+mNestedTouchScrollingLayout.setSheetDirection(NestedTouchScrollingLayout.SheetDirection.BOTTOM);
+
+mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
+	@Override
+	public void onNestChildScrollChange(float deltaY) {
+
+	}
+
+	@Override
+	public void onNestChildScrollRelease(final float deltaY, final int velocityY) {
+		int totalYRange = mNestedTouchScrollingLayout.getMeasuredHeight();
+		int helfLimit = (totalYRange - DisplayUtils.dpToPixel(BottomSheetActivity.this, 400)) / 2;
+		int hideLimit = totalYRange - DisplayUtils.dpToPixel(BottomSheetActivity.this, 400) / 2;
+		int helfHeight = totalYRange - DisplayUtils.dpToPixel(BottomSheetActivity.this, 400);
+		if (velocityY > mVelocityYBound && velocityY > 0) {
+			if (Math.abs(deltaY) > helfHeight) {
+				mNestedTouchScrollingLayout.hiden();
+			} else {
+				mNestedTouchScrollingLayout.peek(mNestedTouchScrollingLayout.getMeasuredHeight() - DisplayUtils.dpToPixel(BottomSheetActivity.this,400));
+			}
+		} else if (velocityY < -mVelocityYBound && velocityY < 0) {
+			if (Math.abs(deltaY) < helfHeight) {
+				mNestedTouchScrollingLayout.expand();
+			} else {
+				mNestedTouchScrollingLayout.peek(mNestedTouchScrollingLayout.getMeasuredHeight() - DisplayUtils.dpToPixel(BottomSheetActivity.this,400));
+			}
+		} else {
+			if (Math.abs(deltaY) > hideLimit) {
+				mNestedTouchScrollingLayout.hiden();
+			} else if (Math.abs(deltaY) > helfLimit) {
+				mNestedTouchScrollingLayout.peek(mNestedTouchScrollingLayout.getMeasuredHeight() - DisplayUtils.dpToPixel(BottomSheetActivity.this, 400));
+			} else {
+				mNestedTouchScrollingLayout.expand();
+			}
+		}
+	}
+
+	@Override
+	public void onFingerUp(float velocityY) {
+
+	}
+
+	@Override
+	public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
+
 	}
 });
 ```
@@ -73,7 +155,7 @@ mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrol
 - [x] hold all touch event, and dispath touch event to child view.
 - [x] fix ACTION_UP dispatch child click event.
 - [x] support bottomsheet.
-- [ ] support CoordinatorLayout (AppbarLayout).
+- [x] support CoordinatorLayout (AppbarLayout).
 - [x] add damping draging.
 
 ### Usage
@@ -85,7 +167,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.JarvisGG:NestedTouchScrollingLayout:v1.1.1'
+    implementation 'com.github.JarvisGG:NestedTouchScrollingLayout:v1.2.0'
 }
 ```
 方式 2:
@@ -95,7 +177,7 @@ repositories {
     jcenter()
 }
 dependencies {
-    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.1.1'
+    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.2.0'
 }
 ```
 
