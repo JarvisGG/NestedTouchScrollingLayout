@@ -23,6 +23,8 @@
         <activity android:name=".RecyclerViewActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".ViewPagerActivity" />
+        <activity android:name=".BottomSheetActivity" />
+        <activity android:name=".AppbarLayoutActivity" />
     </application>
 
 </manifest>

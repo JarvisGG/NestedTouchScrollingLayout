@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebResourceError;
@@ -70,7 +71,7 @@ public class WebViewFragment extends BaseChildFragment {
             }
 
             @Override
-            public void onNestChildHorizationScroll(boolean show) {
+            public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 
             }
         });
