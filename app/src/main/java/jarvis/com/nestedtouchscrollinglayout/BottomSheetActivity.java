@@ -1,6 +1,5 @@
 package jarvis.com.nestedtouchscrollinglayout;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -21,27 +20,37 @@ import jarvis.com.library.NestedTouchScrollingLayout;
 
 /**
  * @author yyf @ Zhihu Inc.
- * @since 10-16-2018
+ * @since 12-04-2018
  */
-public class RecyclerViewActivity extends BaseActivity  {
+
+public class BottomSheetActivity extends BaseActivity {
 
     private int mContainerItemsCount = 20;
-    private int mInnerItemsCount = 13;
+    private int mInnerItemsCount = 30;
+
+    public static int mHalfWindowHeight = 400; // dp
+
+    public static int mVelocityYBound = 1300;
 
     private RecyclerView mContainerRecycler;
 
     private NestedTouchScrollingLayout mNestedTouchScrollingLayout;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recyclerview);
+        setContentView(R.layout.activity_bottom);
+
+        findViewById(R.id.btn_open).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mNestedTouchScrollingLayout.expand();
+            }
+        });
 
         mContainerRecycler = findViewById(R.id.container_rv);
         mContainerRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mContainerRecycler.setAdapter(new InnerAdapter(this, 0x9966CC));
-
         mContainerRecycler.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
@@ -61,7 +70,6 @@ public class RecyclerViewActivity extends BaseActivity  {
         });
 
         mNestedTouchScrollingLayout = findViewById(R.id.wrapper);
-
         mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
             @Override
             public void onNestChildScrollChange(float deltaY) {
@@ -70,12 +78,35 @@ public class RecyclerViewActivity extends BaseActivity  {
 
             @Override
             public void onNestChildScrollRelease(final float deltaY, final int velocityY) {
-                mNestedTouchScrollingLayout.recover(0, new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i("NestedTouchScrollingLayout ---> ", "deltaY : " + deltaY + " velocityY : " + velocityY);
+                int totalYRange = mNestedTouchScrollingLayout.getMeasuredHeight();
+
+                int helfLimit = (totalYRange - DisplayUtils.dpToPixel(BottomSheetActivity.this, mHalfWindowHeight)) / 2;
+
+                int hideLimit = totalYRange - DisplayUtils.dpToPixel(BottomSheetActivity.this, mHalfWindowHeight) / 2;
+
+                int helfHeight = totalYRange - DisplayUtils.dpToPixel(BottomSheetActivity.this, mHalfWindowHeight);
+
+                if (velocityY > mVelocityYBound && velocityY > 0) {
+                    if (Math.abs(deltaY) > helfHeight) {
+                        mNestedTouchScrollingLayout.hiden();
+                    } else {
+                        mNestedTouchScrollingLayout.peek(mNestedTouchScrollingLayout.getMeasuredHeight() - DisplayUtils.dpToPixel(BottomSheetActivity.this,400));
                     }
-                });
+                } else if (velocityY < -mVelocityYBound && velocityY < 0) {
+                    if (Math.abs(deltaY) < helfHeight) {
+                        mNestedTouchScrollingLayout.expand();
+                    } else {
+                        mNestedTouchScrollingLayout.peek(mNestedTouchScrollingLayout.getMeasuredHeight() - DisplayUtils.dpToPixel(BottomSheetActivity.this,400));
+                    }
+                } else {
+                    if (Math.abs(deltaY) > hideLimit) {
+                        mNestedTouchScrollingLayout.hiden();
+                    } else if (Math.abs(deltaY) > helfLimit) {
+                        mNestedTouchScrollingLayout.peek(mNestedTouchScrollingLayout.getMeasuredHeight() - DisplayUtils.dpToPixel(BottomSheetActivity.this, 400));
+                    } else {
+                        mNestedTouchScrollingLayout.expand();
+                    }
+                }
             }
 
             @Override
@@ -88,6 +119,15 @@ public class RecyclerViewActivity extends BaseActivity  {
 
             }
         });
+
+        mNestedTouchScrollingLayout.setSheetDirection(NestedTouchScrollingLayout.SheetDirection.BOTTOM);
+        mNestedTouchScrollingLayout
+                .post(new Runnable() {
+                     @Override
+                     public void run() {
+                         mNestedTouchScrollingLayout.recover(mNestedTouchScrollingLayout.getMeasuredHeight(), null, 0);
+                     }
+                 });
     }
 
     class ContainerAdapter extends RecyclerView.Adapter<ContainerViewHolder> {
@@ -172,7 +212,8 @@ public class RecyclerViewActivity extends BaseActivity  {
 
         private Context mContext;
         private LayoutInflater mInflater;
-        private @ColorInt int mBgColor;
+        private @ColorInt
+        int mBgColor;
 
         public InnerAdapter(Context context, @ColorInt int color) {
             mContext = context;

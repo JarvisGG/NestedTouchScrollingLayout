@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import jarvis.com.library.NestedTouchScrollingLayout;
@@ -51,7 +52,7 @@ public abstract class BaseChildFragment extends Fragment {
             }
 
             @Override
-            public void onNestChildHorizationScroll(boolean show) {
+            public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 
             }
         });

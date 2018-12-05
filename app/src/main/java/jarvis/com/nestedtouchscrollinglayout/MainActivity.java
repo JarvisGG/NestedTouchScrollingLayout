@@ -20,7 +20,9 @@ public class MainActivity extends BaseActivity {
     Class[] demoClasses = new Class[] {
             RecyclerViewActivity.class,
             WebViewActivity.class,
-            ViewPagerActivity.class
+            ViewPagerActivity.class,
+            BottomSheetActivity.class,
+            AppbarLayoutActivity.class
     };
 
     private RecyclerView mRecycler;

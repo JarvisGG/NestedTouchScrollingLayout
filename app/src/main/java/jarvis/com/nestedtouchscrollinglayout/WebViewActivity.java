@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.MotionEvent;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -54,7 +55,7 @@ public class WebViewActivity extends BaseActivity {
             }
 
             @Override
-            public void onNestChildHorizationScroll(boolean show) {
+            public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 
             }
         });
