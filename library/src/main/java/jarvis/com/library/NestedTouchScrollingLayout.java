@@ -821,4 +821,15 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
     public void setParentDispatchTouchEvent(boolean b) {
         isParentDispatchTouchEvent = b;
     }
+
+    /**
+     * 动画是否正在执行
+     * @return
+     */
+    public boolean isAniming() {
+        if (currentAnimator == null) {
+            return false;
+        }
+        return currentAnimator.isRunning();
+    }
 }
