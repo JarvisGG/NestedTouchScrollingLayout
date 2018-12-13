@@ -27,8 +27,6 @@ There has some example gif~
 |webview recyclerview|imageview recyclerview|
 |![demo5](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo5.gif "demo3")|![demo6](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo6.gif "demo4")|
 |scene1|scene2|
-|![demo7](https://github.com/JarvisGG/NestedTouchScrollingLayout/blob/master/captures/demo7.gif "demo3")||
-|scene3||
 
 ### Usage example
 
