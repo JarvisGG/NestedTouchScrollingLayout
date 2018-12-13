@@ -34,7 +34,7 @@ public class WebViewActivity extends BaseActivity {
         initWebSettings();
         initWebViewClient();
 
-        mWebView.loadUrl("http://m.meten.com/xxl/adult.html");
+        mWebView.loadUrl("https://www.baidu.com/");
 
         mContainer = findViewById(R.id.wrapper);
 

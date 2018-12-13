@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="true"
+    android:clipToPadding="true"
+    android:background="#66FFCC">
+
+    <WebView
+        android:id="@+id/container_wb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_marginTop="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000"
+        android:alpha="0.8" />
+
+
+    <jarvis.com.library.NestedTouchScrollingLayout
+        android:id="@+id/wrapper"
+        android:layout_marginTop="251dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/container_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:overScrollMode="always">
+        </android.support.v7.widget.RecyclerView>
+
+    </jarvis.com.library.NestedTouchScrollingLayout>
+
+</FrameLayout>
