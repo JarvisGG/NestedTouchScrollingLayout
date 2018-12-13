@@ -8,7 +8,7 @@ import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 
 /**
- * @author yyf @ Zhihu Inc.
+ * @author Jarvis.
  * @since 12-05-2018
  */
 public class DisplayUtils {

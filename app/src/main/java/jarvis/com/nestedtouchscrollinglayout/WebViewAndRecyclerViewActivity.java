@@ -28,7 +28,7 @@ import android.widget.TextView;
 import jarvis.com.library.NestedTouchScrollingLayout;
 
 /**
- * @author yyf @ Zhihu Inc.
+ * @author Jarvis.
  * @since 10-16-2018
  */
 public class WebViewAndRecyclerViewActivity extends BaseActivity  {

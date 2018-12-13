@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 import jarvis.com.library.NestedTouchScrollingLayout;
 
 /**
- * @author yyf @ Zhihu Inc.
+ * @author Jarvis.
  * @since 10-16-2018
  */
 public class WebViewActivity extends BaseActivity {

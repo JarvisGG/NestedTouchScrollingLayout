@@ -19,7 +19,7 @@ import android.widget.TextView;
 import jarvis.com.library.NestedTouchScrollingLayout;
 
 /**
- * @author yyf @ Zhihu Inc.
+ * @author Jarvis.
  * @since 12-04-2018
  */
 

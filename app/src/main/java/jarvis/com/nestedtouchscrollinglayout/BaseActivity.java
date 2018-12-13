@@ -7,9 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 /**
- * @author Jarvis @ Zhihu Inc.
+ * @author Jarvis
  * @version 1.0
- * @title ZhihuDemo
  * @description 该类主要功能描述
  * @create 2017/11/2 下午2:06
  * @changeRecord [修改记录] <br/>

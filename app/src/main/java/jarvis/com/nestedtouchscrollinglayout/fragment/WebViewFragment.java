@@ -22,7 +22,7 @@ import jarvis.com.library.NestedTouchScrollingLayout;
 import jarvis.com.nestedtouchscrollinglayout.R;
 
 /**
- * @author yyf @ Zhihu Inc.
+ * @author Jarvis.
  * @since 10-16-2018
  */
 public class WebViewFragment extends BaseChildFragment {

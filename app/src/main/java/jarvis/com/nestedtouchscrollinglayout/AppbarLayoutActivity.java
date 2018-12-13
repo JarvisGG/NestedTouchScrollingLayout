@@ -18,7 +18,7 @@ import android.widget.TextView;
 import jarvis.com.library.NestedTouchScrollingLayout;
 
 /**
- * @author yyf @ Zhihu Inc.
+ * @author Jarvis.
  * @since 12-05-2018
  */
 public class AppbarLayoutActivity extends BaseActivity {

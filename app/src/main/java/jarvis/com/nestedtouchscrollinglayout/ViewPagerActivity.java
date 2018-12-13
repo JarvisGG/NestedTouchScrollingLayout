@@ -16,7 +16,7 @@ import jarvis.com.nestedtouchscrollinglayout.fragment.RecyclerViewFragment;
 import jarvis.com.nestedtouchscrollinglayout.fragment.WebViewFragment;
 
 /**
- * @author yyf @ Zhihu Inc.
+ * @author Jarvis.
  * @since 10-16-2018
  */
 public class ViewPagerActivity extends BaseActivity {

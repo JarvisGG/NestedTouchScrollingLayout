@@ -12,7 +12,7 @@ import android.view.View;
 import jarvis.com.library.NestedTouchScrollingLayout;
 
 /**
- * @author yyf @ Zhihu Inc.
+ * @author Jarvis.
  * @since 10-16-2018
  */
 public abstract class BaseChildFragment extends Fragment {
