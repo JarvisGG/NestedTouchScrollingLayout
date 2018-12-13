@@ -1,4 +1,4 @@
-package zhihu.com.nestedtouchscrollinglayout;
+package jarvis.com.nestedtouchscrollinglayout;
 
 import org.junit.Test;
 

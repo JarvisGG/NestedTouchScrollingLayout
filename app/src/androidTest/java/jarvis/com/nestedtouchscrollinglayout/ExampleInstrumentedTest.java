@@ -1,4 +1,4 @@
-package zhihu.com.nestedtouchscrollinglayout;
+package jarvis.com.nestedtouchscrollinglayout;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
