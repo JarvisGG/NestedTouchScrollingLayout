@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("zhihu.com.nestedtouchscrollinglayout", appContext.getPackageName());
+        assertEquals("jarvis.com.nestedtouchscrollinglayout", appContext.getPackageName());
     }
 }
