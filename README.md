@@ -162,7 +162,7 @@ mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrol
 - [x] support bottomsheet.
 - [x] support CoordinatorLayout (AppbarLayout).
 - [x] add damping draging.
-- [x] add blur cover.
+- [ ] add blur cover.
 
 ### Usage
 方式 1:
