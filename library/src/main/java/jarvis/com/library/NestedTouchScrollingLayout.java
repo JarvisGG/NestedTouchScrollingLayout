@@ -267,10 +267,33 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
         }
     }
 
+    private boolean isTouchUnderChildView(MotionEvent event) {
+        View targetChildView = getChildAt(0);
+        float translationX = targetChildView.getTranslationX();
+        float translationY = targetChildView.getTranslationY();
+        float x = event.getX();
+        float y = event.getY();
+        return x >= targetChildView.getLeft() + translationX &&
+                x <= targetChildView.getRight() + translationX &&
+                y >= targetChildView.getTop() + translationY &&
+                y <= targetChildView.getBottom() + translationY;
+    }
+
+    /**
+     * 不拦截 Touch 事件的几种情况
+     * 1.不开启父亲布局拦截.
+     * 2.当前子 View 为 null
+     * 3.当前 Touch 事件没用作用到子 View
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float velocityY = 0;
-        if (getChildAt(0) == null || !isParentDispatchTouchEvent) {
+
+        if (!isParentDispatchTouchEvent ||
+                getChildAt(0) == null ||
+                !isTouchUnderChildView(event)) {
             return super.onTouchEvent(event);
         }
         if (isAnimating()) {
