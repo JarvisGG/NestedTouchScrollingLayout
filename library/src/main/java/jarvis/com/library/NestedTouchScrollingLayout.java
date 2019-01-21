@@ -293,7 +293,8 @@ public class NestedTouchScrollingLayout extends FrameLayout implements NestedScr
 
         if (!isParentDispatchTouchEvent ||
                 getChildAt(0) == null ||
-                !isTouchUnderChildView(event)) {
+                (!isTouchUnderChildView(event) &&
+                        event.getAction() != MotionEvent.ACTION_MOVE)) {
             return super.onTouchEvent(event);
         }
         if (isAnimating()) {
