@@ -31,6 +31,6 @@ dependencies {
 
 
     api project(':library')
-//    implementation('com.github.JarvisGG:NestedTouchScrollingLayout:v1.2.1')
-//    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.2.1'
+//    implementation('com.github.JarvisGG:NestedTouchScrollingLayout:v1.2.2')
+//    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.2.2'
 }
