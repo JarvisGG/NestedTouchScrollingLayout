@@ -53,7 +53,7 @@ public class WebViewAndRecyclerViewActivity extends BaseActivity  {
         mWebView = findViewById(R.id.container_wb);
         initWebSettings();
         initWebViewClient();
-        mWebView.loadUrl("https://www.baidu.com/");
+        mWebView.loadUrl("http://m.meten.com/xxl/adult.html");
 
         mContainerRecycler = findViewById(R.id.container_rv);
         mContainerRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -86,7 +86,7 @@ public class WebViewAndRecyclerViewActivity extends BaseActivity  {
 
         mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
             @Override
-            public void onNestChildScrollChange(float deltaY) {
+            public void onNestChildScrollChange(float deltaY, float velocityY) {
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mWebView.getLayoutParams();
                 params.height = (int) (DisplayUtils.dpToPixel(WebViewAndRecyclerViewActivity.this, 250) + deltaY);
                 mWebView.setLayoutParams(params);

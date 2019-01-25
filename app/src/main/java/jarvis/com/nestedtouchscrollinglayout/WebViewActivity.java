@@ -34,13 +34,13 @@ public class WebViewActivity extends BaseActivity {
         initWebSettings();
         initWebViewClient();
 
-        mWebView.loadUrl("https://www.baidu.com/");
+        mWebView.loadUrl("http://m.meten.com/xxl/adult.html");
 
         mContainer = findViewById(R.id.wrapper);
 
         mContainer.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
             @Override
-            public void onNestChildScrollChange(float deltaY) {
+            public void onNestChildScrollChange(float deltaY, float velocityY) {
 
             }
 

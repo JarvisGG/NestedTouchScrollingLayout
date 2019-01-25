@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import jarvis.com.library.NestedTouchScrollingLayout;
+import jarvis.com.nestedtouchscrollinglayout.view.IndicatorLineView;
 
 /**
  * @author Jarvis.
@@ -36,6 +37,8 @@ public class BottomSheetActivity extends BaseActivity {
 
     private NestedTouchScrollingLayout mNestedTouchScrollingLayout;
 
+    private IndicatorLineView mIndicatorLineView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,8 @@ public class BottomSheetActivity extends BaseActivity {
                 mNestedTouchScrollingLayout.expand();
             }
         });
+
+        mIndicatorLineView = findViewById(R.id.indicator);
 
         mContainerRecycler = findViewById(R.id.container_rv);
         mContainerRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -72,8 +77,8 @@ public class BottomSheetActivity extends BaseActivity {
         mNestedTouchScrollingLayout = findViewById(R.id.wrapper);
         mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
             @Override
-            public void onNestChildScrollChange(float deltaY) {
-
+            public void onNestChildScrollChange(float deltaY, float velocityY) {
+                mIndicatorLineView.updateVelocity(velocityY);
             }
 
             @Override
@@ -111,7 +116,6 @@ public class BottomSheetActivity extends BaseActivity {
 
             @Override
             public void onFingerUp(float velocityY) {
-
             }
 
             @Override

@@ -64,7 +64,7 @@ public class RecyclerViewActivity extends BaseActivity  {
 
         mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
             @Override
-            public void onNestChildScrollChange(float deltaY) {
+            public void onNestChildScrollChange(float deltaY, float velocityY) {
 
             }
 

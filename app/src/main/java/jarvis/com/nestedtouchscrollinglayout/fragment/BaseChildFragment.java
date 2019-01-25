@@ -28,7 +28,7 @@ public abstract class BaseChildFragment extends Fragment {
         mParent = (NestedTouchScrollingLayout) getChildView().getParent();
         mParent.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
             @Override
-            public void onNestChildScrollChange(float deltaY) {
+            public void onNestChildScrollChange(float deltaY, float velocityY) {
 
             }
 

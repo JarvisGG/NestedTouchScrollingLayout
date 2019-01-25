@@ -79,7 +79,7 @@ public class ViewAndRecyclerViewActivity extends BaseActivity  {
 
         mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
             @Override
-            public void onNestChildScrollChange(float deltaY) {
+            public void onNestChildScrollChange(float deltaY, float velocityY) {
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mWrapper.getLayoutParams();
                 params.height = (int) (DisplayUtils.dpToPixel(ViewAndRecyclerViewActivity.this, 400) + deltaY);
                 mWrapper.setLayoutParams(params);
@@ -97,7 +97,7 @@ public class ViewAndRecyclerViewActivity extends BaseActivity  {
 
             @Override
             public void onFingerUp(float velocityY) {
-
+                Log.e("jarivs-velocityY ----> ", "" + velocityY);
             }
 
             @Override

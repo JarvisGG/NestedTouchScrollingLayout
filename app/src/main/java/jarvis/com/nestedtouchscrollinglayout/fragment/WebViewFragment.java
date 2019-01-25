@@ -56,7 +56,7 @@ public class WebViewFragment extends BaseChildFragment {
 
         mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
             @Override
-            public void onNestChildScrollChange(float deltaY) {
+            public void onNestChildScrollChange(float deltaY, float velocityY) {
 
             }
 
@@ -91,7 +91,6 @@ public class WebViewFragment extends BaseChildFragment {
     private void initWebSettings() {
         WebSettings settings = this.mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
-        settings.setPluginState(WebSettings.PluginState.ON);
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
         settings.setSupportZoom(false);
