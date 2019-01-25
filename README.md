@@ -183,7 +183,7 @@ repositories {
     jcenter()
 }
 dependencies {
-    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.2.2'
+    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.2.3'
 }
 ```
 
