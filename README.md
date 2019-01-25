@@ -59,7 +59,7 @@ mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrol
         
         // 当前 Layout 偏移距离
 	@Override
-	public void onNestChildScrollChange(float deltaY) {
+	public void onNestChildScrollChange(float deltaY, float velocityY) {
 
 	}
 	
@@ -111,7 +111,7 @@ mNestedTouchScrollingLayout.setSheetDirection(NestedTouchScrollingLayout.SheetDi
 
 mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
 	@Override
-	public void onNestChildScrollChange(float deltaY) {
+	public void onNestChildScrollChange(float deltaY, float velocityY) {
 
 	}
 
