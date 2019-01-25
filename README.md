@@ -165,6 +165,18 @@ mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrol
 - [ ] add blur cover.
 
 ### Usage
+方式 1:
+``` Gradle
+repositories {
+    // ...
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    implementation 'com.github.JarvisGG:NestedTouchScrollingLayout:1.2.3'
+}
+```
+方式 2:
 ``` Gradle
 repositories {
     // ...
