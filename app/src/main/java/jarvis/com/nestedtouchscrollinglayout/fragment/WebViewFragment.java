@@ -74,6 +74,11 @@ public class WebViewFragment extends BaseChildFragment {
             public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 
             }
+
+            @Override
+            public void onNestScrollingState(int state) {
+
+            }
         });
 
         initWebSettings();

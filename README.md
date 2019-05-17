@@ -84,6 +84,12 @@ mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrol
 	public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 	
 	}
+	
+	// 当前 SheetView 运动状态
+	@Override
+    public void onNestScrollingState(int state) {
+
+    }
 });
 ```
 #### bottomsheet use
@@ -110,13 +116,15 @@ public static int mVelocityYBound = 1300;
 mNestedTouchScrollingLayout.setSheetDirection(NestedTouchScrollingLayout.SheetDirection.BOTTOM);
 
 mNestedTouchScrollingLayout.registerNestScrollChildCallback(new NestedTouchScrollingLayout.INestChildScrollChange() {
+	
+	
 	@Override
-	public void onNestChildScrollChange(float deltaY) {
+	public void onNestChildScrollChange(float deltaY, float velocityY) {
 
 	}
 
 	@Override
-	public void onNestChildScrollRelease(final float deltaY, final int velocityY) {
+	public void onNestChildScrollRelease(float deltaY, int velocityY) {
 		int totalYRange = mNestedTouchScrollingLayout.getMeasuredHeight();
 		int helfLimit = (totalYRange - DisplayUtils.dpToPixel(BottomSheetActivity.this, 400)) / 2;
 		int hideLimit = totalYRange - DisplayUtils.dpToPixel(BottomSheetActivity.this, 400) / 2;
@@ -173,7 +181,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.JarvisGG:NestedTouchScrollingLayout:1.2.3'
+    implementation 'com.github.JarvisGG:NestedTouchScrollingLayout:1.2.4'
 }
 ```
 方式 2:
@@ -183,7 +191,7 @@ repositories {
     jcenter()
 }
 dependencies {
-    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.2.2'
+    implementation 'com.jarvis.library.NestedTouchScrollingLayout:library:1.2.4'
 }
 ```
 

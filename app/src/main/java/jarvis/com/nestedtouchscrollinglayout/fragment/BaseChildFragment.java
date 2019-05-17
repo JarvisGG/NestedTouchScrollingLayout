@@ -55,6 +55,11 @@ public abstract class BaseChildFragment extends Fragment {
             public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 
             }
+
+            @Override
+            public void onNestScrollingState(int state) {
+
+            }
         });
 
         mPager = (ViewPager) getChildView().getParent().getParent();

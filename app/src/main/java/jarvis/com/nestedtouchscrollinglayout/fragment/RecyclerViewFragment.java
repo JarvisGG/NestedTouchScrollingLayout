@@ -76,6 +76,11 @@ public class RecyclerViewFragment extends BaseChildFragment {
             public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 
             }
+
+            @Override
+            public void onNestScrollingState(int state) {
+
+            }
         });
 
         mContainerRecycler.setLayoutManager(new LinearLayoutManager(RecyclerViewFragment.this.getContext(), LinearLayoutManager.VERTICAL, false));

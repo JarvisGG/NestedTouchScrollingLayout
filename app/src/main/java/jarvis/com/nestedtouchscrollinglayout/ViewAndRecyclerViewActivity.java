@@ -104,6 +104,11 @@ public class ViewAndRecyclerViewActivity extends BaseActivity  {
             public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 
             }
+
+            @Override
+            public void onNestScrollingState(int state) {
+
+            }
         });
     }
 

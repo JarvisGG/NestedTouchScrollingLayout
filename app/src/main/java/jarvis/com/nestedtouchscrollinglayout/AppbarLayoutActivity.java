@@ -115,6 +115,11 @@ public class AppbarLayoutActivity extends BaseActivity {
             public void onNestChildHorizationScroll(MotionEvent event, float deltaX, float deltaY) {
 
             }
+
+            @Override
+            public void onNestScrollingState(int state) {
+
+            }
         });
 
         mNestedTouchScrollingLayout.setSheetDirection(NestedTouchScrollingLayout.SheetDirection.BOTTOM);
